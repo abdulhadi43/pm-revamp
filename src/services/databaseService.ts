@@ -4,6 +4,11 @@ import { createConnection } from 'typeorm';
 //import config from '../../config/config';
 //import { Logger } from '../../lib/logger';
 import { User } from '../entity/User';
+import { Post } from '../entity/Post';
+import { Category } from '../entity/Category';
+import { Childern } from '../entity/Childern';
+import { Gender } from '../entity/Gender';
+import { Marital_status } from '../entity/Marital_status';
 
 class DatabaseService {
   public static emitter: EventEmitter = new EventEmitter();
@@ -27,7 +32,7 @@ class DatabaseService {
       database: 'mydatabase',
       synchronize: true,
       logging: false,
-      entities: [User],
+      entities: [User, Post, Category, Childern, Gender, Marital_status],
       migrations: [],
       subscribers: [],
     })

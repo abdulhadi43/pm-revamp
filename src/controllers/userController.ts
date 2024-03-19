@@ -20,6 +20,7 @@ class UserController {
         next(new ServerException('error occurred'));
       });
   };
+
   public static addNew = (req: Request, res: Response, next: any) => {
     service
       .add(req.body)
@@ -35,6 +36,29 @@ class UserController {
         next(new ServerException('error occurred'));
       });
   };
+
+  public static updateUser = (req: Request, res: Response, next: any) => {
+    const userId = parseInt(req.params.id);
+    const userData = req.body;
+    service
+      .getById(userId, userData)
+      .then((user) => {
+        if (user) {
+          res.json(Template.success(user, 'User updated successfully'));
+        } else {
+          next(new APIError('User not found', 404));
+        }
+      })
+      .catch((err) => {
+        console.error('Error updating user:', err);
+        next(new ServerException('Error occurred'));
+      });
+  };
+
 }
 
+
+
 export default UserController;
+
+
